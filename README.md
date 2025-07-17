@@ -57,6 +57,24 @@ Q10.Web/
 - Pruebas unitarias para lógica de dominio y validaciones.
 - Migraciones de base de datos con Entity Framework Core.
 
+## Aplicación de Patrones y Principios SOLID
+
+El proyecto Q10.Web aplica los principios SOLID y patrones de diseño para garantizar un código mantenible, escalable y fácil de probar:
+
+### Principios SOLID
+- **S (Single Responsibility Principle):** Cada clase y capa tiene una única responsabilidad. Por ejemplo, los controladores solo gestionan la lógica de presentación, los handlers de aplicación gestionan la lógica de negocio y los repositorios el acceso a datos.
+- **O (Open/Closed Principle):** Las clases están abiertas a extensión pero cerradas a modificación. Se logra mediante el uso de interfaces y la inyección de dependencias.
+- **L (Liskov Substitution Principle):** Las implementaciones pueden ser reemplazadas por sus abstracciones sin afectar el funcionamiento del sistema. Por ejemplo, los repositorios implementan interfaces genéricas.
+- **I (Interface Segregation Principle):** Se crean interfaces específicas para cada contexto, evitando interfaces grandes y poco cohesionadas.
+- **D (Dependency Inversion Principle):** Las capas superiores dependen de abstracciones, no de implementaciones concretas. Se utiliza inyección de dependencias en toda la solución.
+
+### Patrones de Diseño Aplicados
+- **Clean Architecture:** Separación en capas (Dominio, Aplicación, Infraestructura, Presentación) para desacoplar reglas de negocio de detalles de infraestructura.
+- **Repository Pattern:** Los repositorios abstraen el acceso a datos, permitiendo cambiar la fuente de datos sin afectar la lógica de negocio.
+- **CQRS (Command Query Responsibility Segregation):** Separación de operaciones de consulta y comando usando MediatR.
+- **Dependency Injection:** Todas las dependencias se inyectan a través de los constructores, facilitando el testeo y la extensión.
+- **Validation Pattern:** Uso de FluentValidation para centralizar y desacoplar las reglas de validación del dominio.
+
 ## Primeros Pasos
 
 ### Requisitos
