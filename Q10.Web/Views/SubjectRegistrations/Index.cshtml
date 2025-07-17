@@ -1,0 +1,74 @@
+﻿@model Q10.Web.Models.SubjectRegistrationIndexViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" asp-route-studentId="@(ViewBag.SelectedStudentId)">Create New</a>
+</p>
+
+<form method="get" asp-action="Index">
+    <label class="col-lg-2 control-label">Select student:</label>
+    <select class="col-lg-2 form-control" name="studentId" onchange="this.form.submit()">
+        <option value="">-- Seleccionar Estudiante --</option>
+        @foreach (var student in Model.Students!)
+        {
+            var isSelected = (ViewBag.SelectedStudentId != null && ViewBag.SelectedStudentId.ToString() == student.Id.ToString());
+            <text>
+            <option value="@student.Id" selected="@(isSelected ? " selected" : "")">@student.Name</option>
+            </text>
+        }
+    </select>
+</form>
+@if (Model.SubjectRegistrations != null && Model.SubjectRegistrations.Any())
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Subject Id
+            </th>
+            <th>
+                Subject Name
+            </th>
+            <th>
+                Student Id
+            </th>
+            <th>
+                Student Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SubjectRegistrations!)
+        {
+            <tr>
+                <td>
+                    @item.SubjectId
+                </td>
+                <td>
+                    @item.SubjectName
+                </td>
+                <td>
+                    @item.StudentId
+                </td>
+                <td>
+                    @item.StudentName
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+else
+{
+    <div class="alert alert-info">No hay inscripciones para el estudiante seleccionado.</div>
+}
+

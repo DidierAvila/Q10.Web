@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Students\EventHandlers\" />
+    <Folder Include="SubjectRegistrations\EventHandlers\" />
+    <Folder Include="Subjects\EventHandlers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="13.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Q10.Domain\Q10.Domain.csproj" />
+    <ProjectReference Include="..\Q10.Infrastructure\Q10.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
