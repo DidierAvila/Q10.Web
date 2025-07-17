@@ -1,0 +1,130 @@
+# Q10.Web
+
+Repositorio: [https://github.com/DidierAvila/Q10.Web](https://github.com/DidierAvila/Q10.Web)
+
+## Descripción
+
+**Q10.Web** es una solución modular basada en .NET 8 que implementa una arquitectura limpia (Clean Architecture) para la gestión de estudiantes, materias e inscripciones. El proyecto está organizado en capas separadas para dominio, aplicación, infraestructura, presentación web y pruebas, facilitando la mantenibilidad, escalabilidad y testeo.
+
+## Estructura del Proyecto
+
+```
+Q10.Web/
+│
+├── Q10.Domain/           # Entidades del dominio, DTOs y validadores
+│   ├── Entities/
+│   ├── Dtos/
+│   └── Validator/
+│
+├── Q10.Application/      # Lógica de aplicación, comandos, queries y handlers
+│   ├── Students/
+│   ├── Subjects/
+│   └── SubjectRegistrations/
+│
+├── Q10.Infrastructure/   # Acceso a datos, DbContext, migraciones y repositorios
+│   ├── DbContexts/
+│   ├── Migrations/
+│   └── Repositories/
+│
+├── Q10.Web/              # Proyecto ASP.NET Core MVC (presentación)
+│   ├── Controllers/
+│   ├── Models/
+│   ├── Views/
+│   └── wwwroot/
+│
+├── Test/                 # Proyecto de pruebas unitarias (xUnit)
+│   ├── Student/
+│   ├── Subjects/
+│   └── UnitTest1.cs
+│
+└── Q10.Web.sln           # Solución principal
+```
+
+## Principales Tecnologías
+
+- **.NET 8**
+- **ASP.NET Core MVC**
+- **Entity Framework Core**
+- **FluentValidation** (validación de entidades)
+- **xUnit** (pruebas unitarias)
+- **MediatR** (CQRS y mediación de comandos/queries)
+
+## Características
+
+- Gestión de estudiantes, materias e inscripciones.
+- Arquitectura limpia: separación clara de responsabilidades.
+- Validaciones robustas con FluentValidation.
+- Pruebas unitarias para lógica de dominio y validaciones.
+- Migraciones de base de datos con Entity Framework Core.
+
+## Primeros Pasos
+
+### Requisitos
+
+- [.NET 8 SDK](https://dotnet.microsoft.com/download)
+- SQL Server (o modificar el provider en `Q10.Infrastructure`)
+- Visual Studio 2022+ o VS Code
+
+### Configuración
+
+1. **Clona el repositorio:**
+   ```bash
+   git clone https://github.com/DidierAvila/Q10.Web.git
+   cd Q10.Web
+   ```
+
+2. **Restaura los paquetes NuGet:**
+   ```bash
+   dotnet restore
+   ```
+
+3. **Configura la cadena de conexión** en `Q10.Web/appsettings.json` y/o `Q10.Infrastructure/DbContexts/Q10DbContext.cs`.
+
+4. **Aplica las migraciones:**
+   ```bash
+   dotnet ef database update --project Q10.Infrastructure --startup-project Q10.Web
+   ```
+
+5. **Ejecuta la aplicación:**
+   ```bash
+   dotnet run --project Q10.Web
+   ```
+
+### Ejecutar Pruebas
+
+```bash
+dotnet test
+```
+
+## Estructura de Carpetas
+
+- **Q10.Domain**: Entidades principales (`Student`, `Subject`, `SubjectRegistration`), DTOs y validadores (`SubjectValidator`).
+- **Q10.Application**: Lógica de negocio, comandos y queries para estudiantes, materias e inscripciones.
+- **Q10.Infrastructure**: Implementación de repositorios, DbContext y migraciones.
+- **Q10.Web**: Controladores MVC, vistas Razor y recursos estáticos.
+- **Test**: Pruebas unitarias con xUnit y FluentValidation.TestHelper.
+
+## Ejemplo de Validación
+
+Las entidades usan FluentValidation para reglas de negocio. Ejemplo para `Subject`:
+
+```csharp
+public class SubjectValidator : AbstractValidator<Subject>
+{
+    public SubjectValidator()
+    {
+        RuleFor(x => x.Name)
+            .NotEmpty().WithMessage("El nombre es obligatorio")
+            .MaximumLength(100).WithMessage("El nombre no puede superar los 100 caracteres");
+        // ... otras reglas
+    }
+}
+```
+
+## Inspiración
+
+Este proyecto se inspira en los principios de [Clean Architecture](https://github.com/jasontaylordev/CleanArchitecture/blob/main/README.md) para lograr una solución desacoplada, testeable y fácil de mantener.
+
+## Contribuciones
+
+¡Las contribuciones son bienvenidas! Por favor, abre un issue o pull request para sugerencias o mejoras. 
